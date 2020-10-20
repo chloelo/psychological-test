@@ -85,16 +85,16 @@ const app = new Vue({
       if (this.resultIdx === 4) {
         const result = confirm('確定重新開始測驗嗎？');
         if (result) this.reset();
-      }else{
+      } else {
         this.resultIdx += 1;
       }
     },
     reset() {
-      this.resultIdx = 0,
-        this.problemList = [],
-        this.descriptions = {},
-        this.questionIdx = -1,
-        this.getData();
+      this.resultIdx = 0;
+      this.problemList = [];
+      this.descriptions = {};
+      this.questionIdx = -1;
+      this.getData();
     }
   },
   created() {
