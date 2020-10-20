@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五大性格特質心理測驗 (簡版)</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/layout.css">
+  <script src="https://use.fontawesome.com/16cb87d9dd.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 說明區 -->
+    <div class="wrap zone_index" v-if="questionIdx===-1">
+      <div class="kv">
+        <img src="https://images.unsplash.com/photo-1558021212-51b6ecfa0db9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1361&q=80">
+      </div>
+      <div class="container mb-4">
+        <div class="row">
+          <div class="col-12 my-2 my-md-5 my-3">
+            <h1 class="title d-md-flex justify-content-md-between align-items-md-center">
+
+              <span class="ch">
+                {{site.zh}}
+              </span>
+              <span class="en">{{site.en}}</span>
+            </h1>
+          </div>
+          <div class="col-lg-5 offset-lg-4">
+            <p>{{site.description}}</p>
+          </div>
+          <div class="col-lg-3">
+            <button type="button" class="link link-nextPage" @click.prevent="questionIdx += 1">
+              <span>開始測驗</span>
+              <span class="icon_toRight"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 測驗區 -->
+    <div class="wrap zone_questions" v-else-if="questionIdx>=0 && questionIdx <= 9">
+      <div v-for="(problem,idx) in problemList" :key="problem.id">
+        <div class="d-md-flex" v-if="questionIdx === idx">
+          <button type="button" class="link link-prevPage" v-show="questionIdx !== 0" @click.prevent="questionIdx -= 1">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+          </button>
+          <div class="ques_bg">
+            <div class="ques_cont d-flex flex-column justify-content-between">
+              <h1>{{problem.problem}}</h1>
+              <small class="webname mb-3">
+                {{site.zh}}<br>{{site.en}}
+              </small>
+            </div>
+          </div>
+          <div class="options d-flex flex-column justify-content-md-end justify-content-start">
+            <div class="showPage">{{idx+1}}/{{problemList.length}}</div>
+            <div class="options_cont mb-auto mb-md-5 mt-md-auto mt-3">
+              <label v-for="(item,index) in problem.options" :key="item.description + index">
+                <input type="radio" :value="item.fraction" v-model="problem.score"> <span
+                  class="txt">{{item.description}}</span>
+              </label>
+            </div>
+            <button type="button" class="link link-nextPage" :disabled="problem.score === 0" @click.prevent="nextPage(problem.score)">
+              <span>下一題</span>
+              <span class="icon_toRight"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 結果區 -->
+    <div class="wrap zone_result" v-else>
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <h1>
+            <button type="button" class="navbar-brand" @click.prevent="reset">
+              <span class="ch">
+                {{site.zh}}
+              </span><br>
+              <span class="en">{{site.en}}</span>
+            </button>
+          </h1>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+              <button type="button" class="nav-item nav-link" v-for="(item,key,idx) in descriptions" :key="key+2"
+                @click.prevent="resultIdx = idx" :class="{'active':resultIdx ===idx}">{{item.traitZh}}
+                <span class="sr-only">(current)</span></button>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div v-for="(item,key,idx) in descriptions" :key="key+1" :id="item.traitEn">
+        <div v-if="idx === resultIdx">
+          <div class="hero bgs">
+            <div class="zone_title">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-3 col-md-4">
+                    <h2 class="title">
+                      <span class="ch">{{item.traitZh}}</span>
+                      <span class="en">{{item.traitEn}}</span>
+                    </h2>
+                  </div>
+                  <div class="col-lg-5 col-md-8">
+                    <p>
+                      {{item.desc}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="results">
+            <div class="container py-5">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div v-if="item.score>=degree.high">
+                    <h3><span class="score">高</span></h3>
+                    <p>{{item.high}}</p>
+                  </div>
+                  <div v-else-if="item.score <= degree.low">
+                    <h3><span class="score">低</span></h3>
+                    <p>{{item.low}}</p>
+                  </div>
+                  <div v-else-if="item.score === degree.middle">
+                    <h3><span class="score">中</span></h3>
+                    <p>{{item.middle}}</p>
+                    <div class="plus mt-5">
+                      <p class="item_txt">
+                        <strong class="level">高</strong>
+                        <span>{{item.high}}</span>
+                      </p>
+                      <p class="item_txt">
+                        <strong class="level">低</strong>
+                        <span>
+                          {{item.low}}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="offset-lg-1 col-lg-3 align-self-end text-right">
+                  <button type="button" class="link link-restart" @click.prevent="nextResult">
+                    <span>{{resultIdx === 4? "重新測驗":"下一個"}}</span>
+                    <span class="icon_toRight"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'></script>
+  <script src="js/all.js"></script>
+</body>
+
+</html>

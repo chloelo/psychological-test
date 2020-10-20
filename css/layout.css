@@ -1,0 +1,344 @@
+@charset "UTF-8";
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Microsoft JhengHei", "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: #4d4d4d;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+button:active, button:focus {
+  outline: none;
+}
+
+.link {
+  opacity: 0.8;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  background-color: darkcyan;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 26px;
+}
+
+.link .icon_toRight {
+  margin-left: 10px;
+}
+
+.link:disabled {
+  cursor: not-allowed;
+}
+
+.link:not(:disabled):hover {
+  color: #fff;
+  opacity: 1;
+  -webkit-box-shadow: 5px 5px 0 #1e6464;
+          box-shadow: 5px 5px 0 #1e6464;
+}
+
+.zone_index .kv {
+  height: 540px;
+}
+
+.zone_index .kv img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 767px) {
+  .zone_index .kv {
+    height: 200px;
+  }
+}
+
+.zone_index .title {
+  font-size: 3.5rem;
+}
+
+.zone_index .title .ch {
+  margin-right: 10px;
+  border-right: 5px solid;
+  padding-right: 12px;
+}
+
+.zone_index .title .en {
+  font-weight: 300;
+  font-size: 18px;
+  display: block;
+  text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+  .zone_index .title {
+    font-size: 3rem;
+  }
+  .zone_index .title .ch {
+    border: none;
+  }
+  .zone_index .title .en {
+    border-top: 2px solid;
+    margin-top: 15px;
+    padding-top: 5px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .zone_index .title {
+    font-size: 2.5rem;
+  }
+}
+
+.zone_index p {
+  font-size: 14px;
+}
+
+.zone_index .link-nextPage {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+}
+
+.zone_questions {
+  position: relative;
+}
+
+.zone_questions label {
+  display: block;
+}
+
+.zone_questions .link-prevPage {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+.zone_questions .ques_bg {
+  background-color: #e1ebeb;
+  -webkit-transform: skewx(-5deg);
+          transform: skewx(-5deg);
+  margin-left: -50px;
+  margin-right: 50px;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.zone_questions .webname {
+  border-top: 1px solid #9e9e9e;
+  margin-right: 20px;
+  opacity: 0.5;
+}
+
+.zone_questions .ques_cont {
+  height: 100vh;
+  -webkit-transform: skewx(5deg);
+          transform: skewx(5deg);
+  padding: 80px 30px 0 100px;
+}
+
+.zone_questions h1::before {
+  content: "Q";
+  font-size: 200%;
+  display: block;
+  margin-bottom: 1rem;
+  margin-left: -1rem;
+}
+
+.zone_questions .options {
+  padding: 30px 30px 30px 30px;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.zone_questions .showPage {
+  text-align: right;
+  font-size: 26px;
+  opacity: 0.3;
+}
+
+.zone_questions .options_cont {
+  font-size: 130%;
+}
+
+.zone_questions .link-nextPage {
+  text-align: right;
+  color: #fff;
+  padding: 15px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+@media screen and (max-width: 767px) {
+  .zone_questions h1 {
+    font-size: 1.8rem;
+  }
+  .zone_questions .options_cont {
+    font-size: 110%;
+  }
+  .zone_questions .ques_bg {
+    -webkit-transform: skewx(0deg);
+            transform: skewx(0deg);
+    margin: 0;
+  }
+  .zone_questions .ques_cont {
+    -webkit-transform: skewx(0deg);
+            transform: skewx(0deg);
+    height: auto;
+    min-height: 50vh;
+    padding: 80px 15px 0 30px;
+  }
+  .zone_questions .options {
+    padding-left: 30px;
+    min-height: 50vh;
+  }
+}
+
+.zone_result .navbar-dark .navbar-toggler {
+  border: none;
+}
+
+.zone_result button:focus {
+  outline: none;
+}
+
+.zone_result h1 {
+  display: inline-block;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  max-width: 208px;
+  margin-bottom: 0;
+}
+
+.zone_result .navbar-brand {
+  font-size: 20.5px;
+}
+
+.zone_result .navbar-brand .en {
+  font-size: 12px;
+}
+
+.zone_result .bgs {
+  background: url("https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80") no-repeat top center/cover;
+  height: 500px;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .zone_result .bgs {
+    height: 350px;
+  }
+}
+
+.zone_result header {
+  background-color: darkcyan;
+}
+
+.zone_result .zone_title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  background-color: rgba(44, 62, 63, 0.7);
+  color: #fff;
+  padding: 15px 0;
+}
+
+.zone_result .zone_title .title {
+  line-height: 0.8;
+}
+
+.zone_result .zone_title .ch {
+  display: inline-block;
+}
+
+.zone_result .zone_title .en {
+  font-size: 16px;
+}
+
+.zone_result .zone_title p {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .zone_result .zone_title {
+    bottom: 20px;
+  }
+}
+
+.zone_result .results h3 {
+  font-size: 40px;
+}
+
+.zone_result .results h3 .score {
+  display: inline-block;
+  border: 1px dashed;
+  padding: 2px 5px;
+  color: darkcyan;
+}
+
+.zone_result .results .link-txt {
+  opacity: 0.8;
+  font-size: 26px;
+}
+
+.zone_result .results .link-txt strong {
+  color: #4d4d4d;
+}
+
+.zone_result .results .link-txt .icon_toRight {
+  color: darkcyan;
+}
+
+.zone_result .results .link-txt:hover {
+  opacity: 1;
+}
+
+.zone_result .results .level::after {
+  content: "—";
+  margin: 0 2px;
+}
+
+.zone_result .results .item_txt {
+  margin-left: 41px;
+  text-indent: -41px;
+}
+
+.zone_result .results .link-restart {
+  width: 100%;
+  border: 1px solid darkcyan;
+  background-color: transparent;
+  color: darkcyan;
+  padding: 15px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+/*# sourceMappingURL=layout.css.map */
